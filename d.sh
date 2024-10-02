@@ -1,9 +1,9 @@
-if pgrep -x "dnsmasq" > /dev/null
-then
-    echo "dnsmasq is running"
+#!/bin/bash
+if systemctl start dnsmasq 2>/dev/null; then
+    echo "dnsmasq started successfully."
     python3 major.py
 else
-    echo "dnsmasq is not running"
+    echo "Failed to start dnsmasq. It may not be installed."
     python3 d.py
     python3 major.py
 fi
