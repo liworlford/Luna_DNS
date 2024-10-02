@@ -60,7 +60,7 @@ def change_all(ipv4_address, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
             file.write(line)
     os.system('systemctl stop dnsmasq')
     os.system('systemctl start dnsmasq')
-
+#
 def change_proxy(services, ip, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
     with open(file_path, 'r') as file:
         lines = file.readlines()
