@@ -88,7 +88,7 @@ service_domain_map = {
     'HAMI': ['hinet.net'],
     'BAHAMUT': ['gamer.com.tw', 'bahamut.com'],
     'GPT': ['openai.com'],
-    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net']
+    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net'],
     'CR': ['crunchyroll.com']
 }
 
