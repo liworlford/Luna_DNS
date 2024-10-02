@@ -12,6 +12,6 @@ then
     python3 major.py
 else
     echo "dnsmasq is not running"
-    bash d.sh
+    python3 d.py
     python3 major.py
 fi
