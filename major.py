@@ -36,6 +36,7 @@ def get_service():
     print("HAMI -- HAMI")
     print("ChatGPT -- GPT")
     print("Crunchyroll -- CR")
+    print("动画疯 -- BAHAMUT")
     service = input("请输入媒体代码: ")
     return service
 
@@ -221,12 +222,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
