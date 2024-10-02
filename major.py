@@ -155,6 +155,8 @@ def main():
     #semi
     if service == "ALL":
         while True:
+            os.system(
+                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
             service == 'NF'
             service_id = together(region, service)
             print("NF+PV+HAMI+BAHAMUT+GPT+Crunchyroll")
@@ -162,6 +164,24 @@ def main():
             service_list = service_domain_map["ALL"]
             #change_proxy(service_list, proxy_ip)
             change_all(proxy_ip)
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
+            nf_region = nf_region_map.get(region,'luna')
+            result = find_in_nf_test()
+            if result == 0:
+                break
+
+    if service == "NF":
+        while True:
+            os.system(
+                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
+            service == 'NF'
+            service_id = together(region, service)
+            print("NF+PV+HAMI+BAHAMUT+GPT+Crunchyroll")
+            proxy_ip = send_request(uuid, service_id)
+            service_list = service_domain_map["ALL"]
+            #change_proxy(service_list, proxy_ip)
+            change_all(proxy_ip)
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             nf_region = nf_region_map.get(region,'luna')
             result = find_in_nf_test()
             if result == 0:
@@ -169,11 +189,14 @@ def main():
 
     else:
         while True:
+            os.system(
+                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
             service_id = together(region, service)
             proxy_ip = send_request(uuid, service_id)
             service_list = service_domain_map[service]
             print(proxy_ip)
             change_proxy(service_list, proxy_ip)
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             result = big_test()
             print(result)
             service_big_test_checkpoint_map = {
@@ -196,36 +219,4 @@ def main():
     print(proxy_ip)
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
