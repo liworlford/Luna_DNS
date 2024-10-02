@@ -4927,7 +4927,7 @@ function Global_UnlockTest() {
         MediaUnlockTest_BahamutAnime &
     )
     wait
-    local array="Disney+:" "Netflix:" "YouTube Premium:" "Amazon Prime Video:""Crunchyroll:" "Bilibili: " "Bahamut Anime:")
+    local array=("Disney+:" "Netflix:" "YouTube Premium:" "Amazon Prime Video:""Crunchyroll:" "Bilibili: " "Bahamut Anime:")
     echo_result ${result} ${array}
     local result=$(
         RegionTest_Bing &
