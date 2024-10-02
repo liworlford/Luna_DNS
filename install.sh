@@ -8,7 +8,9 @@ curl -L -o d.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads
 if pgrep -x "dnsmasq" > /dev/null
 then
     echo "dnsmasq is running"
+    python3 major.py
 else
     echo "dnsmasq is not running"
     bash d.sh
+    python3 major.py
 fi
