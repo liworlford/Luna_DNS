@@ -1807,7 +1807,7 @@ function MediaUnlockTest_PrimeVideo() {
         return
     fi
     if [ -n "$region" ]; then
-        echo -n -e "PV${region}"
+        echo -n -e "\r Amazon Prime Video:\t\t\t${Font_Green}Yes (Region: ${region})${Font_Suffix}\n"
         return
     fi
 
@@ -4918,22 +4918,25 @@ function Global_UnlockTest() {
     echo ""
     echo "============[ Multination ]============"
     local result=$(
+        MediaUnlockTest_DisneyPlus &
         MediaUnlockTest_Netflix &
-        MediaUnlockTest_Crunchyroll &
+        MediaUnlockTest_YouTube_Premium &
         MediaUnlockTest_PrimeVideo &
-        MediaUnlockTest_HBOGO_ASIA &
-        MediaUnlockTest_HBOMax &
+        MediaUnlockTest_Crunchyroll &
+        MediaUnlockTest_BilibiliHKMCTW &
+        MediaUnlockTest_BahamutAnime &
     )
     wait
-    local array=("Netflix:" "Crunchyroll:" "Amazon Prime Video:" "HBO")
+    local array="Disney+:" "Netflix:" "YouTube Premium:" "Amazon Prime Video:""Crunchyroll:" "Bilibili: " "Bahamut Anime:")
     echo_result ${result} ${array}
     local result=$(
         RegionTest_Bing &
+        RegionTest_YouTubeCDN &
+        RegionTest_NetflixCDN &
         WebTest_OpenAI &
-        GameTest_Steam &
     )
     wait
-    local array=("Bing Region:" "YouTube CDN:" "Netflix Preferred CDN:" "ChatGPT:" "Google Gemini:" "Wikipedia Editability:" "Google Search CAPTCHA Free:" "Steam Currency:")
+    local array=("Bing Region:" "YouTube CDN:" "Netflix Preferred CDN:" "ChatGPT:")
     echo_result ${result} ${array}
     show_region Forum
     WebTest_Reddit
@@ -5093,23 +5096,6 @@ function EU_UnlockTest() {
 function HK_UnlockTest() {
     echo "=============[ Hong Kong ]============="
     local result=$(
-        MediaUnlockTest_TVBBuy &
-        MediaUnlockTest_ViuCom &
-        MediaUnlockTest_ViuTV &
-        MediaUnlockTest_HKTV &
-        MediaUnlockTest_MyTVSuper &
-        MediaUnlockTest_HBOGO_ASIA &
-        MediaUnlockTest_SonyLiv &
-        MediaUnlockTest_BilibiliHKMCTW &
-        MediaUnlockTest_BahamutAnime &
-    )
-    wait
-    local array=("TVB Buy:" "Viu.com:" "Viu.TV:" "HKTV:" "MyTVSuper:" "HBO GO Asia:" "SonyLiv:" "BiliBili Hongkong/Macau/Taiwan:" "Bahamut Anime:")
-    echo_result ${result} ${array}
-    show_region TW
-    echo "======================================="
-}
-    local result=$(
         MediaUnlockTest_NowE &
         MediaUnlockTest_ViuCom &
         MediaUnlockTest_ViuTV &
@@ -5158,8 +5144,17 @@ function IN_UnlockTest() {
 function TW_UnlockTest() {
     echo "==============[ Taiwan ]==============="
     local result=$(
+        MediaUnlockTest_KKTV &
+        MediaUnlockTest_LiTV &
+        MediaUnlockTest_MyVideo &
+        MediaUnlockTest_4GTV &
+        MediaUnlockTest_LineTVTW &
         MediaUnlockTest_HamiVideo &
+        MediaUnlockTest_Catchplay &
+        MediaUnlockTest_HBOGO_ASIA &
         MediaUnlockTest_BahamutAnime &
+        MediaUnlockTest_SonyLiv &
+        MediaUnlockTest_BilibiliTW &
     )
     wait
     local array=("KKTV:" "LiTV:" "MyVideo:" "4GTV.TV:" "LineTV.TW:" "Hami Video:" "CatchPlay+:" "HBO GO Asia:" "Bahamut Anime:" "SonyLiv:" "Bilibili Taiwan Only:")
@@ -5872,7 +5867,7 @@ function showGoodbye() {
         echo -e ''
         echo -e "${Font_Yellow}检测脚本当天运行次数: ${TODAY_RUN_TIMES}; 共计运行次数: ${TOTAL_RUN_TIMES}${Font_Suffix}"
         echo -e ''
-        # bash <(curl ${CURL_DEFAULT_OPTS} -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/reference/AD/AD${ADN})
+        bash <(curl ${CURL_DEFAULT_OPTS} -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/reference/AD/AD1)
         echo -e ''
         bash <(curl ${CURL_DEFAULT_OPTS} -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/reference/AD/AD2)
     fi
