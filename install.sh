@@ -4,4 +4,11 @@ curl -L -o check.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/h
 curl -L -o major.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/major.py
 curl -L -o d.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.sh
 curl -L -o d.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.py
-bash d.sh
+if systemctl start dnsmasq 2>/dev/null; then
+    echo "dnsmasq started successfully."
+    python3 major.py
+else
+    echo "Failed to start dnsmasq. It may not be installed."
+    python3 d.py
+    python3 major.py
+fi
