@@ -1,10 +1,12 @@
 import os
 import subprocess
+#调试中
 import requests
 import re
 
 #0可以 1不行
 #service_id的格式是region_service
+
 
 def get_uuid():
     if not os.path.exists('uuid.txt'):
@@ -60,7 +62,7 @@ def change_all(ipv4_address, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
             file.write(line)
     os.system('systemctl stop dnsmasq')
     os.system('systemctl start dnsmasq')
-#
+
 def change_proxy(services, ip, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
     with open(file_path, 'r') as file:
         lines = file.readlines()
@@ -79,7 +81,7 @@ def change_proxy(services, ip, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
             file.write(line)
     os.system('systemctl stop dnsmasq')
     os.system('systemctl start dnsmasq')
-    print("work_done")
+    print("change_work_done")
 
 # 调用示例
 service_domain_map = {
@@ -88,8 +90,7 @@ service_domain_map = {
     'HAMI': ['hinet.net'],
     'BAHAMUT': ['gamer.com.tw', 'bahamut.com'],
     'GPT': ['openai.com'],
-    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net'],
-    'CR': ['crunchyroll.com']
+    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net']
 }
 
 nf_region_map = {
@@ -111,7 +112,7 @@ nf_region_map = {
 #check_point = service_big_test_map[service][0]
 
 #print(check_point)
-######################################3#######################
+######################################3
 
 def nf_test():
     result = os.popen("./nf")
@@ -119,7 +120,7 @@ def nf_test():
     return result
 def big_test():
     process = subprocess.Popen(
-        'echo 0 | bash check.sh -M 4',
+        'echo 1 | bash check.sh -M 4',
         shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -135,68 +136,69 @@ def find_in_big_test_result(checkpoint,test_result):
     else:
         return 1
 
-def find_in_nf_test():
+def find_in_nf_test(nf_region):
     for _ in range(10):
-        if media == "GL":
-            print("0")
-            result = os.popen("./nf")
-            result = result.read()
-            print(result)
-            if "您的出口IP完整解锁Netflix，支持非自制剧的观看" in result and f"所识别的IP地域信息：{region_name}" in result:
-                print("done")
-                return 0
+        result = os.popen("./nf")
+        result = result.read()
+        print(result)
+        if "您的出口IP完整解锁Netflix，支持非自制剧的观看" in result and f"所识别的IP地域信息：{nf_region}" in result:
+            print("done")
+            return 0
 
 def together(region,service):
     return f"{region}_{service}"
+
+
 def main():
     uuid = get_uuid()
     region = get_region()
     service = get_service()
-    #semi
+    print(service)
+
     if service == "ALL":
         while True:
-            os.system(
-                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
-            service == 'NF'
+            service = 'NF'
             service_id = together(region, service)
+            print(service_id)
             print("NF+PV+HAMI+BAHAMUT+GPT+Crunchyroll")
             proxy_ip = send_request(uuid, service_id)
-            service_list = service_domain_map["ALL"]
-            #change_proxy(service_list, proxy_ip)
-            change_all(proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
-            nf_region = nf_region_map.get(region,'luna')
-            result = find_in_nf_test()
-            if result == 0:
+            print("requested")
+            if proxy_ip is None:
+                print("Failed to get proxy IP. Exiting.")
                 break
 
+            change_all(proxy_ip)
+            nf_region = nf_region_map.get(region, 'luna')
+            result = find_in_nf_test(nf_region)
+            if result == 0:
+                break
     if service == "NF":
         while True:
-            os.system(
-                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
-            service == 'NF'
+            service = 'NF'
             service_id = together(region, service)
+            print(service_id)
             print("NF+PV+HAMI+BAHAMUT+GPT+Crunchyroll")
             proxy_ip = send_request(uuid, service_id)
-            service_list = service_domain_map["ALL"]
-            #change_proxy(service_list, proxy_ip)
-            change_all(proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
-            nf_region = nf_region_map.get(region,'luna')
-            result = find_in_nf_test()
-            if result == 0:
+            print("requested")
+            if proxy_ip is None:
+                print("Failed to get proxy IP. Exiting.")
                 break
 
+            change_all(proxy_ip)
+            nf_region = nf_region_map.get(region, 'luna')
+            result = find_in_nf_test(nf_region)
+            if result == 0:
+                break
     else:
         while True:
-            os.system(
-                "systemctl stop systemd-resolved && systemctl disable systemd-resolved && rm -rf /etc/resolv.conf && echo 'nameserver 8.8.8.8'>/etc/resolv.conf")
             service_id = together(region, service)
             proxy_ip = send_request(uuid, service_id)
+            if proxy_ip is None:
+                print("Failed to get proxy IP. Exiting.")
+                break
             service_list = service_domain_map[service]
             print(proxy_ip)
             change_proxy(service_list, proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             result = big_test()
             print(result)
             service_big_test_checkpoint_map = {
@@ -207,16 +209,45 @@ def main():
             }
             check_point = service_big_test_checkpoint_map[service][0]
             print(check_point)
-            if find_in_big_test_result(check_point,result) == 0:
+            if find_in_big_test_result(check_point, result) == 0:
                 break
 
-    print('dns_work_done')
-    print('感谢使用Luna_DNS')
-
-
-
-
+    print('work_done')
     print(proxy_ip)
+
+
 if __name__ == "__main__":
     main()
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
