@@ -6,7 +6,6 @@
 
 ```
 curl -L -o install.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/install.sh
-
 bash install.sh
 ```
 
@@ -15,3 +14,4 @@ bash install.sh
 4.等待脚本执行完毕 自行检测解锁情况 好用再给钱
 
 PS:本项目目前解锁列表有限 不过不是不在列表上的就不能解 只是看运气 目前列表有Netflix ChatGPT PrimeVideo 动画疯 HAMI Crunchyroll 计划中的有：Disney+ Hulu ABEMA Bilibili国际版 等 可以issue我添加别的流媒体
+支持地区包含JP HK US TW SG 德国（代码是DE处于beta状态 99%不好用没事别用） 英国（代码是GB处于beta状态 99&没事别用）
