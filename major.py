@@ -168,7 +168,7 @@ def main():
                 break
 
             change_all(proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 8.8.4.4'>/etc/resolv.conf")
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             nf_region = nf_region_map.get(region, 'luna')
             result = find_in_nf_test(nf_region)
             if result == 0:
@@ -186,7 +186,7 @@ def main():
                 break
 
             change_all(proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 8.8.4.4'>/etc/resolv.conf")
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             nf_region = nf_region_map.get(region, 'luna')
             result = find_in_nf_test(nf_region)
             if result == 0:
@@ -201,7 +201,7 @@ def main():
             service_list = service_domain_map[service]
             print(proxy_ip)
             change_proxy(service_list, proxy_ip)
-            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 8.8.4.4'>/etc/resolv.conf")
+            os.system("rm -rf /etc/resolv.conf && echo 'nameserver 127.0.0.1'>/etc/resolv.conf")
             result = big_test()
             print(result)
             service_big_test_checkpoint_map = {
