@@ -4,3 +4,4 @@ curl -L -o check.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/h
 curl -L -o major.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/major.py
 curl -L -o d.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.sh
 curl -L -o d.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.py
+bash d.sh
