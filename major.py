@@ -91,7 +91,8 @@ service_domain_map = {
     'HAMI': ['hinet.net'],
     'BAHAMUT': ['gamer.com.tw', 'bahamut.com'],
     'GPT': ['openai.com'],
-    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net']
+    'PV': ['amazonprimevideo.cn', 'amazonprimevideo.com.cn', 'mazonprimevideos.com', 'amazonvideo.cc', 'media-amazon.com', 'prime-video.com', 'primevideo.cc', 'primevideo.com', 'primevideo.info', 'primevideo.org', 'primevideo.tv', 'pv-cdn.net'],
+    'CR': ['crunchyroll.com']
 }
 
 nf_region_map = {
@@ -210,6 +211,7 @@ def main():
                 'BAHAMUT': ['Bahamut Anime:\t\t\t\t[32mYes ('],
                 'GPT': ['ChatGPT:\t\t\t\t[32mYes[0m'],
                 'PV': [f"Amazon Prime Video:\t\t\t[32mYes (Region: {region})[0m"]
+                'CR': ['Crunchyroll:\t\t\t\t[32mYes[0m']
             }
             check_point = service_big_test_checkpoint_map[service][0]
             print(check_point)
