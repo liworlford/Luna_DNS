@@ -211,7 +211,7 @@ def main():
                 'BAHAMUT': ['Bahamut Anime:\t\t\t\t[32mYes ('],
                 'GPT': ['ChatGPT:\t\t\t\t[32mYes[0m'],
                 'PV': [f"Amazon Prime Video:\t\t\t[32mYes (Region: {region})[0m"],
-                'CR': ['Crunchyroll:\t\t\t\t[32mYes[0m']
+                "CR": ['Crunchyroll:\t\t\t\t[32mYes[0m']
             }
             check_point = service_big_test_checkpoint_map[service][0]
             print(check_point)
