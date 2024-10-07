@@ -139,7 +139,7 @@ def find_in_big_test_result(checkpoint,test_result):
         return 1
 
 def find_in_nf_test(nf_region):
-    for _ in range(10):
+    for _ in range(4):
         result = os.popen("./nf")
         result = result.read()
         print(result)
