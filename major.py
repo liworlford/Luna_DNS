@@ -152,6 +152,9 @@ def together(region,service):
 
 
 def main():
+    print('使用本脚本请注意如下事项：')
+    print('1.你需要先获得uuid')
+    print('2.本脚本使用过程中仅能输入大写字母 不支持特殊字符和小写 请严格按照提示输入否则报错')
     uuid = get_uuid()
     region = get_region()
     service = get_service()
