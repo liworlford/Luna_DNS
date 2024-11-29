@@ -50,7 +50,7 @@ def send_request(uuid, region):
         print("请求失败:", response.json())
         return None
 
-def change_all(ipv4_address, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
+def change_all(ipv4_address, file_path='/etc/dnsmasq.conf'):
     with open(file_path, 'r') as file:
         lines = file.readlines()
 # 用于匹配IPv4地址的正则表达式
