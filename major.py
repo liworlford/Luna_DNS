@@ -41,7 +41,7 @@ def get_service():
     return service
 
 def send_request(uuid, region):
-    url = f"http://162.245.220.180:8080?uuid={uuid}&region={region}"
+    url = f"http://http://109.176.255.156:8080?uuid={uuid}&region={region}"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
