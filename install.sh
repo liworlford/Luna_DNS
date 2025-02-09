@@ -4,6 +4,7 @@ curl -L -o check.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/h
 curl -L -o major.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/major.py
 curl -L -o d.sh https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.sh
 curl -L -o d.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/d.py
+curl -L -o nat.py https://raw.githubusercontent.com/liworlford/Luna_DNS/refs/heads/main/nat.py
 if systemctl start dnsmasq 2>/dev/null; then
     echo "dnsmasq started successfully."
     echo "请注意 如果不是初次安装或更新 只是更改地区解锁 请运行python3 major.py节约时间"
