@@ -50,7 +50,8 @@ def send_request(uuid, region):
         print("请求失败:", response.json())
         return None
 
-def change_all(ipv4_address, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
+def change_all(ipv4_address, file_path='/etc/dnsmasq.conf'):
+    os.system('systemctl stop dnsmasq')
     with open(file_path, 'r') as file:
         lines = file.readlines()
 # 用于匹配IPv4地址的正则表达式
@@ -61,10 +62,11 @@ def change_all(ipv4_address, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
                 # 替换匹配行中的IPv4地址为新的IP地址
                 line = ipv4_pattern.sub(ipv4_address, line)
             file.write(line)
-    os.system('systemctl stop dnsmasq')
+
     os.system('systemctl start dnsmasq')
 
 def change_proxy(services, ip, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
+    os.system('systemctl stop dnsmasq')
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
@@ -80,7 +82,7 @@ def change_proxy(services, ip, file_path='/etc/dnsmasq.d/custom_netflix.conf'):
                     line = ipv4_pattern.sub(ip, line)
                     break
             file.write(line)
-    os.system('systemctl stop dnsmasq')
+
     os.system('systemctl start dnsmasq')
     print("change_work_done")
 
